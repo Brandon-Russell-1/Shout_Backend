@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*
 
 
 @CrossOrigin
+@RequestMapping("/")
 @RestController
 class ShoutController {
 
