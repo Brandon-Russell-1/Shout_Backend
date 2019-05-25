@@ -5,8 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import app.bwizlabs.dayshout.repo.ShoutRepository
 import app.bwizlabs.dayshout.model.Shout
 import org.springframework.web.bind.annotation.*
-import java.sql.Date
-import java.time.LocalDate
+
 
 
 @RestController
@@ -17,7 +16,7 @@ class ShoutController {
 
     @RequestMapping("/save")
     fun save(): String {
-//        repository.save(Shout(shoutDate = LocalDate(5/24/2019), shoutEntry = "What up bro!!!", shoutLat = 32.5, shoutLong = 23.4))
+        repository.save(Shout( shoutIp = "test", shoutEntry = "test", shoutLat = 0.0, shoutLong = 0.0))
 
         return "Done"
     }
