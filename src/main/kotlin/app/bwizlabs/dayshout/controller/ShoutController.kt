@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*
 
 
 @CrossOrigin
-@RequestMapping("/")
 @RestController
 class ShoutController {
 
@@ -19,6 +18,11 @@ class ShoutController {
         repository.save(Shout( shoutIp = "test", shoutEntry = "test", shoutLat = 0.0, shoutLong = 0.0))
 
         return "Done"
+    }
+
+    @RequestMapping("/add", method = arrayOf(RequestMethod.POST))
+    fun addShout(@RequestBody shout: Shout){
+        repository.save(shout)
     }
 
 
