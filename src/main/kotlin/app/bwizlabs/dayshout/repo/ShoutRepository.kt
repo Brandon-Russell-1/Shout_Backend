@@ -12,4 +12,6 @@ interface ShoutRepository : CrudRepository<Shout, Long> {
 
     fun findByShoutEntry(shoutEntry: String): Iterable<Shout>
 
+    fun findAllOrderByShoutDateDesc(): List<Shout>
+
 }

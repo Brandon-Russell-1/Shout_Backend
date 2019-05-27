@@ -39,5 +39,8 @@ class ShoutController {
     fun findByShout(@PathVariable shoutEntry: String)
             = repository.findByShoutEntry(shoutEntry)
 
+    @RequestMapping("findAllOrderByShoutDateDesc")
+    fun findByAllOrderByShoutDateDesc()
+            = repository.findAllOrderByShoutDateDesc()
 
 }
