@@ -3,7 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import app.bwizlabs.dayshout.repo.ShoutRepository
 import app.bwizlabs.dayshout.model.Shout
 import org.springframework.web.bind.annotation.*
-
+import org.springframework.data.domain.Sort
 
 @CrossOrigin
 @RestController
@@ -27,7 +27,7 @@ class ShoutController {
 
 
     @RequestMapping("/findall")
-    fun findAll() = repository.findAll()
+    fun findAll() = repository.findAll(Sort(Sort.Direction.DESC, "shoutDate"))
 
 
     @RequestMapping("/findbyid/{id}")
@@ -35,12 +35,5 @@ class ShoutController {
             = repository.findById(id)
 
 
-    @RequestMapping("findByShout/{shoutEntry}")
-    fun findByShout(@PathVariable shoutEntry: String)
-            = repository.findByShoutEntry(shoutEntry)
-
-    @RequestMapping("findAllOrderByShoutDateDesc")
-    fun findByAllOrderByShoutDateDesc()
-            = repository.findAllOrderByShoutDateDesc()
 
 }
