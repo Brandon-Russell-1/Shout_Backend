@@ -6,10 +6,12 @@ import app.bwizlabs.dayshout.model.Shout
 import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 
 
+@CrossOrigin
 @Repository
 interface ShoutRepository : PagingAndSortingRepository<Shout, Long>{
 
