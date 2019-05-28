@@ -1,5 +1,6 @@
 package app.bwizlabs.dayshout
 
+import app.bwizlabs.dayshout.model.Shout
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
@@ -12,5 +13,7 @@ class DayshoutApplicationTests {
     @Test
     fun contextLoads() {
     }
+
+
 
 }

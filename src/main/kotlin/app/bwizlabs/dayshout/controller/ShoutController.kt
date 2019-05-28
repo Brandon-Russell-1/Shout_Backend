@@ -4,6 +4,13 @@ import app.bwizlabs.dayshout.repo.ShoutRepository
 import app.bwizlabs.dayshout.model.Shout
 import org.springframework.web.bind.annotation.*
 import org.springframework.data.domain.Sort
+import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.query.Param
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.bind.annotation.RequestMapping
+
+
 
 @CrossOrigin
 @RestController
@@ -23,6 +30,7 @@ class ShoutController {
     @RequestMapping("/add", method = arrayOf(RequestMethod.POST))
     fun addShout(@RequestBody shout: Shout){
         repository.save(shout)
+
     }
 
 
@@ -34,6 +42,13 @@ class ShoutController {
     fun findById(@PathVariable id: Long)
             = repository.findById(id)
 
+    @RequestMapping("/find/{userLat}/{userLong}")
+    fun findUserLocationShouts(@PathVariable userLat: Double , @PathVariable  userLong: Double) {
+        repository.findUserLocationShouts(userLat, userLong)
+        println(userLat)
+        println(userLong)
+
+    }
 
 
 }
