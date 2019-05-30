@@ -1,0 +1,36 @@
+https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDL2VpoycKtKH9ui3tr-TfUlH7L27zVZyA
+
+Google Geo API Key
+AIzaSyDL2VpoycKtKH9ui3tr-TfUlH7L27zVZyA
+
+$ curl -d @your_filename.json -H "Content-Type: application/json" -i "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDL2VpoycKtKH9ui3tr-TfUlH7L27zVZyA"
+
+
+
+
+           /*   <Grid Item xs={3}>
+                <Map
+                    style = { style }
+                    onClick = { this.onMapClick }
+                    google={google}
+                    initialCenter={userLocation}
+                    zoom={15} >
+
+                    <Marker
+                        onClick = { this.onMarkerClick }
+                        title = { 'Your Location' }
+                        position = { userLocation}
+                        name = { 'Your Location' }
+                    />
+                    <InfoWindow
+                        marker = { this.state.activeMarker }
+                        visible = { this.state.showingInfoWindow }
+                    >
+                        <div>
+                            <h4>{this.state.selectedPlace.name}</h4>
+                        </div>
+                    </InfoWindow>
+
+                </Map>
+
+               </Grid>*/
