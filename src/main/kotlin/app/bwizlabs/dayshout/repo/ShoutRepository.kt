@@ -17,7 +17,9 @@ lateinit var repository: ShoutRepository
 @Repository
 interface ShoutRepository : PagingAndSortingRepository<Shout, Long>{
 
-    @Query("SELECT id, shout_date, shout_entry, shout_ip, shout_lat, shout_long,  calculate_distance(:userLat, :userLong, shout_lat, shout_long, 'M') FROM shout s WHERE calculate_distance(:userLat, :userLong, shout_lat, shout_long, 'M') <= :zoom", nativeQuery = true)
+    @Query("SELECT id, shout_date, shout_entry, shout_ip, shout_lat, shout_long,  calculate_distance(:userLat, :userLong, shout_lat, shout_long, 'M') " +
+            "FROM shout s WHERE calculate_distance(:userLat, :userLong, shout_lat, shout_long, 'M') " +
+            "<= 156543.03392 * cos(:userLat * pi() / 180) / power(2, :zoom)", nativeQuery = true)
     fun findUserLocationShouts(@Param("userLat") userLat: Double, @Param("userLong") userLong: Double, @Param("zoom") zoom: Integer): Iterable<Shout>{
         println(userLat)
         println(userLong)
