@@ -44,8 +44,7 @@ class ShoutController {
 
    @RequestMapping("/find/{userLat}/{userLong}/{zoom}")
     fun findUserLocationShouts(@Param("userLat") userLat: Double, @Param("userLong") userLong: Double, @Param("zoom") zoom: Integer): Iterable<Shout> {
-        println(userLat)
-        println(userLong)
+
        return repository.findUserLocationShouts(userLat, userLong, zoom)
 
 
