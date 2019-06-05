@@ -21,8 +21,6 @@ interface ShoutRepository : PagingAndSortingRepository<Shout, Long>{
             "FROM shout s WHERE calculate_distance(:userLat, :userLong, shout_lat, shout_long, 'M') " +
             "<= 156543.03392 * cos(:userLat * pi() / 180) / power(2, :zoom) ORDER BY calculate_distance(:userLat, :userLong, shout_lat, shout_long, 'M') ASC", nativeQuery = true)
     fun findUserLocationShouts(@Param("userLat") userLat: Double, @Param("userLong") userLong: Double, @Param("zoom") zoom: Integer): Iterable<Shout>{
-        println(userLat)
-        println(userLong)
         return repository.findUserLocationShouts(userLat, userLong, zoom)
     }
 
