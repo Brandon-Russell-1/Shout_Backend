@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 
 @Entity
-class Shout(
+data class Shout(
         val shoutIp: String,
         val shoutDate: LocalDate = LocalDate.now(),
         val shoutEntry: String,
