@@ -27,23 +27,30 @@ class ShoutController {
         return "Done"
     }
 
-/*    @RequestMapping("/add", method = arrayOf(RequestMethod.POST))
+    @RequestMapping("/add", method = arrayOf(RequestMethod.POST))
     fun addShout(@RequestBody shout: Shout){
         repository.save(shout)
 
-    }*/
+    }
+/*
 
     @RequestMapping("/add", method = arrayOf(RequestMethod.POST))
-    fun addShout(@RequestPart("shoutImage") multiPartFile : MultipartFile,
+    fun addShout(@RequestPart("shoutImage") multiPartFile : MultipartFile*/
+/*,
                  @RequestPart("shoutIp") shoutIp : String,
                  @RequestPart("shoutEntry") shoutEntry : String,
                  @RequestPart("shoutLat") shoutLat : Double,
-                 @RequestPart("shoutLong") shoutLong : Double){
-        repository.save(Shout(shoutImage = multiPartFile.bytes, mime = multiPartFile.contentType.toString(), shoutIp = shoutIp, shoutEntry = shoutEntry, shoutLat = shoutLat, shoutLong = shoutLong))
+                 @RequestPart("shoutLong") shoutLong : Double*//*
+){
+
+        println(multiPartFile)
+        repository.save(Shout(shoutImage = multiPartFile.bytes, mime = multiPartFile.contentType.toString(), shoutIp = "", shoutEntry = "", shoutLat = 0.0, shoutLong = 0.0))
+        //repository.save(Shout(shoutImage = multiPartFile.bytes, mime = multiPartFile.contentType.toString(), shoutIp = shoutIp, shoutEntry = shoutEntry, shoutLat = shoutLat, shoutLong = shoutLong))
 
 
         //@RequestPart("image") multiPartFile : MultipartFile
     }
+*/
 
 
     @RequestMapping("/findall")
