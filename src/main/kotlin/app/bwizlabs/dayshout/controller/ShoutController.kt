@@ -63,8 +63,7 @@ class ShoutController {
     }
 
 
-    //This is a Kotlin extension function that turns a MultipartFile into a PersistedImage
-  //  fun MultipartFile.toPersistedImage() = Shout(shoutImage = this.bytes, mime = this.contentType)
+
 
 
 
