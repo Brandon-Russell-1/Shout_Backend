@@ -11,6 +11,7 @@ data class Shout(
 
         @Lob
         val shoutImage: ByteArray? = null,
+        val shoutSmallImage: ByteArray? = null,
        val mime: String? = "",
         val shoutIp: String,
         val shoutDate: LocalDate = LocalDate.now(),

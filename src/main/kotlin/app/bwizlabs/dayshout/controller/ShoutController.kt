@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.multipart.MultipartFile
+import javax.imageio.ImageIO
+import java.awt.image.BufferedImage
+import java.io.ByteArrayInputStream
+import java.io.InputStream
+import java.awt.Graphics2D
+import java.awt.Image
+import java.io.ByteArrayOutputStream
 
 
 @CrossOrigin(value = "*", exposedHeaders = ["Content-Disposition"])
@@ -43,12 +50,30 @@ class ShoutController {
                  @RequestParam("shoutLong") shoutLong : Double
 ){
 
-       // println(multiPartFile)
-     //   repository.save(Shout(shoutImage = multiPartFile.bytes, mime = multiPartFile.contentType.toString(), shoutIp = "", shoutEntry = "", shoutLat = 0.0, shoutLong = 0.0))
-        repository.save(Shout(shoutImage = multiPartFile.bytes, mime = multiPartFile.contentType, shoutIp = shoutIp, shoutEntry = shoutEntry, shoutLat = shoutLat, shoutLong = shoutLong))
+        println(multiPartFile.contentType.toString().substring(multiPartFile.contentType.toString().indexOf('/')+1))
+
+        var imageType = ""
+        if(multiPartFile.contentType.toString().substring(multiPartFile.contentType.toString().indexOf('/')+1) == "jpeg")
+            imageType = "jpg"
+        else if(multiPartFile.contentType.toString().substring(multiPartFile.contentType.toString().indexOf('/')+1) == "png")
+            imageType = "png"
+        // convert byte array back to BufferedImage
+        val `in` = ByteArrayInputStream(multiPartFile.bytes)
+        val bImageFromConvert = ImageIO.read(`in`)
+
+        //resize
+        val resized = resize(bImageFromConvert, 100, 100)
+
+        //convert BufferedImage to byte array
+
+        val baos = ByteArrayOutputStream()
+        ImageIO.write(resized, imageType, baos)
+        baos.flush()
+        val imageInByte = baos.toByteArray()
 
 
-        //@RequestPart("image") multiPartFile : MultipartFile
+        repository.save(Shout(shoutImage = multiPartFile.bytes, shoutSmallImage = imageInByte,mime = multiPartFile.contentType, shoutIp = shoutIp, shoutEntry = shoutEntry, shoutLat = shoutLat, shoutLong = shoutLong))
+
     }
 
 
@@ -70,7 +95,14 @@ class ShoutController {
     }
 
 
-
+    private fun resize(img: BufferedImage, height: Int, width: Int): BufferedImage {
+        val tmp = img.getScaledInstance(width, height, Image.SCALE_FAST)
+        val resized = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
+        val g2d = resized.createGraphics()
+        g2d.drawImage(tmp, 0, 0, null)
+        g2d.dispose()
+        return resized
+    }
 
 
 
