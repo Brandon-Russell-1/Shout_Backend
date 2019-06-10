@@ -68,6 +68,7 @@ class ShoutController {
 
         var imageWidth = bImageFromConvert.width
         var imageHeight = bImageFromConvert.height
+        var imageSizeFactor = 2
 
         //resize for table thumbnail
         val resized = resize(bImageFromConvert, 100, 100)
@@ -82,12 +83,15 @@ class ShoutController {
 
         if (imageType != "gif"){
 
-            if(imageHeight > 100 || imageWidth > 100) {
-                imageWidth = imageWidth / 2
-                imageHeight = imageHeight / 2
+            if(multiPartFile.size > 800000) {
+                imageSizeFactor = 4
+            }else if(multiPartFile.size > 400000){
+                imageSizeFactor = 4
+            }else if(multiPartFile.size > 200000){
+                imageSizeFactor = 2
             }
 
-            val resizedLarge = resize(bImageFromConvert, imageHeight, imageWidth)
+            val resizedLarge = resize(bImageFromConvert, imageHeight/imageSizeFactor, imageWidth/imageSizeFactor)
             //convert BufferedImage to byte array
 
 
