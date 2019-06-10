@@ -50,29 +50,59 @@ class ShoutController {
                  @RequestParam("shoutLong") shoutLong : Double
 ){
 
-        println(multiPartFile.contentType.toString().substring(multiPartFile.contentType.toString().indexOf('/')+1))
+      //  println(multiPartFile.contentType.toString().substring(multiPartFile.contentType.toString().indexOf('/')+1))
 
-        var imageType = ""
-        if(multiPartFile.contentType.toString().substring(multiPartFile.contentType.toString().indexOf('/')+1) == "jpeg")
-            imageType = "jpg"
+        var imageType = "png"
+        if(multiPartFile.contentType.toString().substring(multiPartFile.contentType.toString().indexOf('/')+1) == "jpeg" ||
+                multiPartFile.contentType.toString().substring(multiPartFile.contentType.toString().indexOf('/')+1) == "jpg")
+            imageType = "png"
         else if(multiPartFile.contentType.toString().substring(multiPartFile.contentType.toString().indexOf('/')+1) == "png")
             imageType = "png"
+        else if(multiPartFile.contentType.toString().substring(multiPartFile.contentType.toString().indexOf('/')+1) == "gif")
+            imageType = "gif"
+
+
         // convert byte array back to BufferedImage
         val `in` = ByteArrayInputStream(multiPartFile.bytes)
         val bImageFromConvert = ImageIO.read(`in`)
 
-        //resize
-        val resized = resize(bImageFromConvert, 100, 100)
+        var imageWidth = bImageFromConvert.width
+        var imageHeight = bImageFromConvert.height
 
-        //convert BufferedImage to byte array
+        //resize for table thumbnail
+        val resized = resize(bImageFromConvert, 100, 100)
 
         val baos = ByteArrayOutputStream()
         ImageIO.write(resized, imageType, baos)
         baos.flush()
         val imageInByte = baos.toByteArray()
 
+        //resize for main image file
+        var imageInByteLarge = baos.toByteArray()
 
-        repository.save(Shout(shoutImage = multiPartFile.bytes, shoutSmallImage = imageInByte,mime = multiPartFile.contentType, shoutIp = shoutIp, shoutEntry = shoutEntry, shoutLat = shoutLat, shoutLong = shoutLong))
+        if (imageType != "gif"){
+
+            if(imageHeight > 100 || imageWidth > 100) {
+                imageWidth = imageWidth / 2
+                imageHeight = imageHeight / 2
+            }
+
+            val resizedLarge = resize(bImageFromConvert, imageHeight, imageWidth)
+            //convert BufferedImage to byte array
+
+
+            val baos2 = ByteArrayOutputStream()
+            ImageIO.write(resizedLarge, imageType, baos2)
+            baos2.flush()
+            imageInByteLarge = baos2.toByteArray()
+
+
+        }else{
+            imageInByteLarge = multiPartFile.bytes
+        }
+
+
+        repository.save(Shout(shoutImage = imageInByteLarge, shoutSmallImage = imageInByte,mime = multiPartFile.contentType, shoutIp = shoutIp, shoutEntry = shoutEntry, shoutLat = shoutLat, shoutLong = shoutLong))
 
     }
 
@@ -96,7 +126,7 @@ class ShoutController {
 
 
     private fun resize(img: BufferedImage, height: Int, width: Int): BufferedImage {
-        val tmp = img.getScaledInstance(width, height, Image.SCALE_FAST)
+        val tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH)
         val resized = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
         val g2d = resized.createGraphics()
         g2d.drawImage(tmp, 0, 0, null)
