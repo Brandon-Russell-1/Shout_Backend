@@ -9,9 +9,9 @@ import javax.xml.bind.DatatypeConverter
 @Entity
 data class Shout(
 
-   //     @Lob
-  //      val shoutImage: ByteArray? = null,
-   //     val mime: String = "",
+        @Lob
+        val shoutImage: ByteArray? = null,
+       val mime: String? = "",
         val shoutIp: String,
         val shoutDate: LocalDate = LocalDate.now(),
         val shoutEntry: String,
