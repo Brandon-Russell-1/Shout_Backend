@@ -83,11 +83,7 @@ class ShoutController {
 
         if (imageType != "gif"){
 
-            if(multiPartFile.size > 800000) {
-                imageSizeFactor = 4
-            }else if(multiPartFile.size > 400000){
-                imageSizeFactor = 4
-            }else if(multiPartFile.size > 200000){
+            if(imageWidth > 800 || imageHeight > 800) {
                 imageSizeFactor = 2
             }
 
