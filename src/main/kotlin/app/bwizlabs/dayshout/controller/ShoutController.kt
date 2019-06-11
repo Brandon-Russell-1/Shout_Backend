@@ -79,7 +79,7 @@ class ShoutController {
         val imageInByte = baos.toByteArray()
 
         //resize for main image file
-        var imageInByteLarge = baos.toByteArray()
+/*        var imageInByteLarge = baos.toByteArray()
 
         if (imageType != "gif"){
 
@@ -99,10 +99,10 @@ class ShoutController {
 
         }else{
             imageInByteLarge = multiPartFile.bytes
-        }
+        }*/
 
-
-        repository.save(Shout(shoutImage = imageInByteLarge, shoutSmallImage = imageInByte,mime = multiPartFile.contentType, shoutIp = shoutIp, shoutEntry = shoutEntry, shoutLat = shoutLat, shoutLong = shoutLong))
+       
+        repository.save(Shout(shoutImage = multiPartFile.bytes, shoutSmallImage = imageInByte,mime = multiPartFile.contentType, shoutIp = shoutIp, shoutEntry = shoutEntry, shoutLat = shoutLat, shoutLong = shoutLong))
 
     }
 
