@@ -101,7 +101,7 @@ class ShoutController {
             imageInByteLarge = multiPartFile.bytes
         }*/
 
-       
+
         repository.save(Shout(shoutImage = multiPartFile.bytes, shoutSmallImage = imageInByte,mime = multiPartFile.contentType, shoutIp = shoutIp, shoutEntry = shoutEntry, shoutLat = shoutLat, shoutLong = shoutLong))
 
     }
