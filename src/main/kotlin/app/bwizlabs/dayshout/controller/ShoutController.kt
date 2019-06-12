@@ -116,10 +116,12 @@ class ShoutController {
     fun findById(@PathVariable id: Long)
             = repository.findById(id)
 
-   @RequestMapping("/find/{userLat}/{userLong}/{zoom}")
-    fun findUserLocationShouts(@Param("userLat") userLat: Double, @Param("userLong") userLong: Double, @Param("zoom") zoom: Integer): Iterable<Shout> {
+   @RequestMapping("/find/{userLat}/{userLong}/{zoom}/{shouthave}")
+    fun findUserLocationShouts(@Param("userLat") userLat: Double, @Param("userLong") userLong: Double, @Param("zoom") zoom: Integer, @Param("shouthave") shouthave: Collection<String>): Iterable<Shout> {
 
-       return repository.findUserLocationShouts(userLat, userLong, zoom)
+   //    var tempString = shouthave.joinToString()
+
+       return repository.findUserLocationShouts(userLat, userLong, zoom, shouthave)
 
 
     }
