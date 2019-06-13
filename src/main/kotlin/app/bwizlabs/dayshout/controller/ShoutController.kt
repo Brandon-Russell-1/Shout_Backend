@@ -19,7 +19,7 @@ import java.awt.Graphics2D
 import java.awt.Image
 import java.io.ByteArrayOutputStream
 
-
+//Controller
 @CrossOrigin(value = "*", exposedHeaders = ["Content-Disposition"])
 @RestController
 class ShoutController {
