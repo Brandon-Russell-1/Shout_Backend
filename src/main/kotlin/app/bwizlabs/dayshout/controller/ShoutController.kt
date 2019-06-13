@@ -129,7 +129,7 @@ class ShoutController {
 
     }
 
-
+//Compress Image
     private fun resize(img: BufferedImage, height: Int, width: Int): BufferedImage {
         val tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH)
         val resized = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
