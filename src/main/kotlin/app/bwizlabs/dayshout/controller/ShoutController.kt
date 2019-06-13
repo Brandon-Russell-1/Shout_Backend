@@ -117,7 +117,10 @@ class ShoutController {
             = repository.findById(id)
 
    @RequestMapping("/find/{userLat}/{userLong}/{zoom}/{shouthave}")
-    fun findUserLocationShouts(@Param("userLat") userLat: Double, @Param("userLong") userLong: Double, @Param("zoom") zoom: Integer, @Param("shouthave") shouthave: Collection<String>): Iterable<Shout> {
+    fun findUserLocationShouts(@Param("userLat") userLat: Double,
+                               @Param("userLong") userLong: Double,
+                               @Param("zoom") zoom: Integer,
+                               @Param("shouthave") shouthave: Collection<String> = mutableListOf("0","0")): Iterable<Shout> {
 
    //    var tempString = shouthave.joinToString()
 
