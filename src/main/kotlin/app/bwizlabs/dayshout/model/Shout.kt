@@ -1,6 +1,6 @@
 package app.bwizlabs.dayshout.model
 
-
+//Model
 
 import java.time.LocalDate
 import javax.persistence.*
